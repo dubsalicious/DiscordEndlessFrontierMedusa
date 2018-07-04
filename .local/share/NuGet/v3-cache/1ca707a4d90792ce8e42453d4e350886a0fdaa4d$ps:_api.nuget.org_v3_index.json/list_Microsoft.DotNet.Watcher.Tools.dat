@@ -1,0 +1,14 @@
+{
+  "versions": [
+    "1.0.0-msbuild1-final",
+    "1.0.0-msbuild1-update1",
+    "1.0.0-msbuild2-final",
+    "1.0.0-msbuild3-final",
+    "1.0.0-preview1-final",
+    "1.0.0-preview2-final",
+    "1.0.0-preview3-final",
+    "1.0.0-preview4-final",
+    "1.0.0",
+    "1.1.0-preview4-final"
+  ]
+}
