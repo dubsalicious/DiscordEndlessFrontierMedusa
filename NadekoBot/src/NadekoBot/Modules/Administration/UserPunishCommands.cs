@@ -171,22 +171,35 @@ namespace NadekoBot.Modules.Administration
             [NadekoCommand, Usage, Description, Aliases]
             [RequireContext(ContextType.Guild)]
             [RequireUserPermission(GuildPermission.BanMembers)]
-            public Task Warnclear(IGuildUser user)
-                => Warnclear(user.Id);
+            public Task Warnclear(IGuildUser user, int index = 0)
+                => Warnclear(user.Id, index);
 
             [NadekoCommand, Usage, Description, Aliases]
             [RequireContext(ContextType.Guild)]
             [RequireUserPermission(GuildPermission.BanMembers)]
-            public async Task Warnclear(ulong userId)
+            public async Task Warnclear(ulong userId, int index = 0)
             {
                 using (var uow = _db.UnitOfWork)
                 {
+                    if (index == 0)        
+                    {
                     await uow.Warnings.ForgiveAll(Context.Guild.Id, userId, Context.User.ToString()).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await uow.Warnings.Forgive(Context.Guild.Id, userId, Context.User.ToString(), index-1);
+                    }
                     uow.Complete();
                 }
-
-                await ReplyConfirmLocalized("warnings_cleared",
-                    Format.Bold((Context.Guild as SocketGuild)?.GetUser(userId)?.ToString() ?? userId.ToString())).ConfigureAwait(false);
+                var userStr = Format.Bold((Context.Guild as SocketGuild)?.GetUser(userId)?.ToString() ?? userId.ToString());
+                if (index == 0)
+                {
+                await ReplyConfirmLocalized("warnings_cleared", userStr).ConfigureAwait(false);
+                }
+                else
+                {
+                await ReplyConfirmLocalized("warning_cleared", Format.Bold(index.ToString()),userStr).ConfigureAwait(false);
+                }
             }
 
             [NadekoCommand, Usage, Description, Aliases]
