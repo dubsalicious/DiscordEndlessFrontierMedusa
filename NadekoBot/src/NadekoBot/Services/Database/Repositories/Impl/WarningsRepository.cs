@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace NadekoBot.Services.Database.Repositories.Impl
 {
@@ -32,16 +33,22 @@ namespace NadekoBot.Services.Database.Repositories.Impl
                 })
                 .ConfigureAwait(false);
         }
-        public async Task Forgive(ulong guildId, ulong userId, string mod, int index)
+       public bool Forgive(ulong guildId, ulong userId, string mod, int index)
         {
-            await _set.Where(x => x.GuildId == guildId && x.UserId == userId)
+            if (index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            var warn = _set.Where(x => x.GuildId == guildId && x.UserId == userId)
                 .OrderByDescending(x => x.DateAdded)
                 .Skip(index)
                 .FirstOrDefault();
 
+            if (warn == null || warn.Forgiven)
+                return false;
+
             warn.Forgiven = true;
             warn.ForgivenBy = mod;
-            .ConfigureAwait(false);
+            return true;
         }
         public Warning[] GetForGuild(ulong id)
         {
