@@ -179,26 +179,37 @@ namespace NadekoBot.Modules.Administration
             [RequireUserPermission(GuildPermission.BanMembers)]
             public async Task Warnclear(ulong userId, int index = 0)
             {
+                if (index < 0)
+                    return;
+                var success = false;
                 using (var uow = _db.UnitOfWork)
                 {
-                    if (index == 0)        
+                    if (index == 0)
                     {
-                    await uow.Warnings.ForgiveAll(Context.Guild.Id, userId, Context.User.ToString()).ConfigureAwait(false);
+                        await uow.Warnings.ForgiveAll(Context.Guild.Id, userId, Context.User.ToString()).ConfigureAwait(false);
                     }
                     else
                     {
-                        await uow.Warnings.Forgive(Context.Guild.Id, userId, Context.User.ToString(), index-1);
+                        success = uow.Warnings.Forgive(Context.Guild.Id, userId, Context.User.ToString(), index - 1);
                     }
                     uow.Complete();
                 }
                 var userStr = Format.Bold((Context.Guild as SocketGuild)?.GetUser(userId)?.ToString() ?? userId.ToString());
                 if (index == 0)
                 {
-                await ReplyConfirmLocalized("warnings_cleared", userStr).ConfigureAwait(false);
+                    await ReplyConfirmLocalized("warnings_cleared", userStr).ConfigureAwait(false);
                 }
                 else
                 {
-                await ReplyConfirmLocalized("warning_cleared", Format.Bold(index.ToString()),userStr).ConfigureAwait(false);
+                    if (success)
+                    {
+                        await ReplyConfirmLocalized("warning_cleared", Format.Bold(index.ToString()), userStr)
+                            .ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await ReplyErrorLocalized("warning_clear_fail").ConfigureAwait(false);
+                    }
                 }
             }
 
