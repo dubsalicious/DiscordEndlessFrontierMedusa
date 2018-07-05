@@ -1,0 +1,1 @@
+This is a branch off from [Nadeko 1.4 by Kwoth](https://github.com/Kwoth/NadekoBot) for the EF discord server. We can can customize our self-hosted version to fit our needs, and collaborate on development here. Please reach out to Prav#3294 on Discord for questions.
