@@ -81,7 +81,7 @@ namespace NadekoBot.Modules.Permissions.Services
                 ? false
                 : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
         
-        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg
+        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg)
         {
             if (guild is null)
                 return false;
