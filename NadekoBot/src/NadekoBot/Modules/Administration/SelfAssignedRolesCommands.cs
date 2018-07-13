@@ -227,13 +227,14 @@ namespace NadekoBot.Modules.Administration
 		    roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
 		    if (roles.Any(s => s.Id == role.Id) == false)
                     {
-                       await ReplyErrorLocalized("greetdmmsg_new").ConfigureAwait(false);
+                        await ReplyConfirmLocalized("self_assign_remove", Format.Bold(role.Name)).ConfigureAwait(false);
           
                     }
 		    }
 			catch Exception(ex){
 				log.info(ex);
 				log.error(ex);
+				await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
 			}
 		}    
 		using (var uow = _db.UnitOfWork)
