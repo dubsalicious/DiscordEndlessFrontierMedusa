@@ -413,7 +413,7 @@ namespace NadekoBot.Services
                     return (false, null, cmd);
                 }
             }
-
+            _log.Info("chosenOverload: [{0}], chosenOverload.value: [{1}]", chosenOverload, chosenOverload.value);
             //If we get this far, at least one parse was successful. Execute the most likely overload.
             var chosenOverload = successfulParses[0];
             var execResult = (ExecuteResult)await chosenOverload.Key.ExecuteAsync(context, chosenOverload.Value, services).ConfigureAwait(false);
