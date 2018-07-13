@@ -224,12 +224,12 @@ namespace NadekoBot.Modules.Administration
 		using (var uow = _db.UnitOfWork)
                 {
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
-                    if (roles.Any(s => s.RoleId == role.Id) == false)
+                    if (roles.Any(s => s.Id == role.Id) == false)
                     {
                        await ReplyErrorLocalized("greetdmmsg_new").ConfigureAwait(false);
           
                     }
-    
+		}    
 		using (var uow = _db.UnitOfWork)
                 {
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
