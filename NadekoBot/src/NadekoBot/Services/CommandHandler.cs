@@ -407,6 +407,7 @@ namespace NadekoBot.Services
                         }catch{ }
                 return (false, bestMatch.Value.ErrorReason, commands[0].Command);
             }
+            }
 
             var cmd = successfulParses[0].Key.Command;
 
