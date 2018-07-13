@@ -215,6 +215,7 @@ namespace NadekoBot.Modules.Administration
             [RequireContext(ContextType.Guild)]
             public async Task Iam([Remainder] IRole role)
             {
+                _log.Info("log this please?!");
                 var guildUser = (IGuildUser)Context.User;
 
                 GuildConfig conf;
