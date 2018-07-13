@@ -43,7 +43,7 @@ namespace NadekoBot.Modules.Administration.Services
                         if (role != null)
                             await user.AddRoleAsync(role).ConfigureAwait(false);
                     }
-                    catch (Exception ex) { _log.Warn("TITS"); }
+                    catch (Exception ex) { _log.Warn(ex); }
                 });
                 return Task.CompletedTask;
             };
