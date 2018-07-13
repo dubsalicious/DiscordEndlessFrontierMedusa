@@ -70,7 +70,7 @@ namespace NadekoBot.Modules.Permissions.Services
                     if (guild == null || usrMsg == null)
                         return Task.CompletedTask;
 
-                    return TryBlockEarly(guild, usrMsg);
+                    return TryBlockEarly(guild, usrMsg, channel);
                 });
                 return Task.CompletedTask;
             };
@@ -81,7 +81,7 @@ namespace NadekoBot.Modules.Permissions.Services
                 ? false
                 : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
         
-        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg)
+        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg, ITextChannel channel)
         {
             if (guild is null)
                 return false;
