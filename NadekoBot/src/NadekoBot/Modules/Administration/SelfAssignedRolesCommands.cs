@@ -224,7 +224,8 @@ namespace NadekoBot.Modules.Administration
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id).ToArray();
                 }
-		if (roles.Contains(role) == false)
+		var index = Array.FindIndex(roles, x => x == role)
+		if (index == -1)
 		{
 			await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
 			return;
