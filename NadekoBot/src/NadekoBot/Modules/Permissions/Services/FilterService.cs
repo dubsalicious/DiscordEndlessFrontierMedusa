@@ -103,7 +103,8 @@ namespace NadekoBot.Modules.Permissions.Services
                             _log.Info("test");
                             
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
-                            await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
+                            //await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
+                            await channel.SendErrorAsync("testy test").ConfigureAwait(false);
                             
                         }
                         catch (HttpException ex)
