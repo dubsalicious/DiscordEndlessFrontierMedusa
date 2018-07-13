@@ -224,11 +224,15 @@ namespace NadekoBot.Modules.Administration
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id).ToArray();
                 }
-		if(Array.Exists(roles, r => r == role.Id)
-		{
-			await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
-			return;
-		}
+                if (roles.Contains(role.Id) == false) {
+                    await ReplyErrorLocalized("self_assign_not_exist").ConfigureAwait(false);
+                    return;
+                }
+		        //if(Array.Exists(roles, r => r == role.Id)
+		        //{
+			    //    await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
+			    //    return;
+		        //}
                 if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
                     await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
