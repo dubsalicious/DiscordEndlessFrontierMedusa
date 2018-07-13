@@ -219,43 +219,13 @@ namespace NadekoBot.Modules.Administration
                 var guildUser = (IGuildUser)Context.User;
 
                 GuildConfig conf;
-                SelfAssignedRole[] roles;
-                
-		using (var uow = _db.UnitOfWork)
-                {
-                    try{
-		    roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
-		    if (roles.Any(s => s.Id == role.Id) == false)
-                    {
-                        await ReplyConfirmLocalized("self_assign_remove", Format.Bold(role.Name)).ConfigureAwait(false);
-          
-                    }
-		    }
-			catch Exception(ex){
-				log.info(ex);
-				log.error(ex);
-				await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
-			}
-		}    
+                SelfAssignedRole[] roles;   
 		using (var uow = _db.UnitOfWork)
                 {
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id).ToArray();
                 }
-             //   if (roles.Contains(role.Id) == false) {
-             //       await ReplyErrorLocalized("self_assign_not_exist").ConfigureAwait(false);
-             //      return;
-             //   }
-		//catch Exception(ex){
-		//if(Array.Exists((roles, r => r.Id == role.Id) == false)
-		//{
-		//await ReplyErrorLocalized("self_assign_already", Format.Bold(role.Name)).ConfigureAwait(false);
-		//log.info(ex);
-		//return;
-		//}
-		//log.info(ex);
-		//  }
-		if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
+             	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
                     await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
                     return;
