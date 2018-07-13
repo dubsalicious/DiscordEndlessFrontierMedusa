@@ -80,7 +80,7 @@ namespace NadekoBot.Modules.Permissions.Services
             =>  !(msg.Author is IGuildUser gu) //it's never filtered outside of guilds, and never block administrators
                 ? false
                 : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
-        [RequireContext(ContextType.Guild)]
+        
         public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg)
         {
             if (guild is null)
