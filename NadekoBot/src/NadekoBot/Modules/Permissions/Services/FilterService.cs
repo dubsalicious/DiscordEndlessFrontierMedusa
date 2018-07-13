@@ -100,9 +100,10 @@ namespace NadekoBot.Modules.Permissions.Services
                     {
                         try
                         {
-                            _log.Warn("test");
-                            await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
+                            await _log.Info("test");
+                            
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
+                            await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
                             
                         }
                         catch (HttpException ex)
