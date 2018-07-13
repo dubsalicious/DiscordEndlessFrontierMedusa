@@ -224,9 +224,9 @@ namespace NadekoBot.Modules.Administration
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id).ToArray();
                 }
-                if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
+                if ((roles.FirstOrDefault(r=>r.RoleId == role.Id) == null) || (roles.FirstOrDefault(r=>RoleId == null)))
                 {
-                    //await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
+                    await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
                     return;
                 }
                 if (guildUser.RoleIds.Contains(role.Id))
