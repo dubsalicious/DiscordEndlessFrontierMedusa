@@ -100,7 +100,7 @@ namespace NadekoBot.Modules.Permissions.Services
                     {
                         try
                         {
-                            await _log.Info("test");
+                            _log.Info("test");
                             await Context.Channel.SendMessageAsync("hello").ConfigureAwait(false);
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
                             await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
