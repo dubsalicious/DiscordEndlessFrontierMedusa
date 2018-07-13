@@ -6,6 +6,7 @@ using Discord;
 using Discord.Net;
 using Discord.WebSocket;
 using NadekoBot.Common.Collections;
+using NadekoBot.Common.Attributes;
 using NadekoBot.Common.ModuleBehaviors;
 using NadekoBot.Extensions;
 using NadekoBot.Services;
@@ -99,6 +100,7 @@ namespace NadekoBot.Modules.Permissions.Services
                     {
                         try
                         {
+                            _log.Warn("test");
                             await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
                             
