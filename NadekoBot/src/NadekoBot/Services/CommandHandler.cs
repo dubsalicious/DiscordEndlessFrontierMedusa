@@ -211,9 +211,6 @@ namespace NadekoBot.Services
             {
                 _log.Warn("Error in CommandHandler");
                 _log.Warn(ex);
-                if (ex == "Role not found") {
-                _log.warn("is it working?");
-                }
                 if (ex.InnerException != null)
                 {
                     _log.Warn("Inner Exception of the error in CommandHandler");
@@ -396,6 +393,18 @@ namespace NadekoBot.Services
                 //All parses failed, return the one from the highest priority command, using score as a tie breaker
                 var bestMatch = parseResults
                     .FirstOrDefault(x => !x.Value.IsSuccess);
+                //For the .iam command failure, add a special case where we show a custom message to the user too
+                if(bestMatch.Key.Command.Name == "iam"
+                        && bestMatch.Value.ErrorReason == "Role not found."){
+                        try{
+                            await context.Channel
+                            .SendErrorAsync(
+                                context.User.Mention +
+                                " I am unable to add that role to you because that" +
+                                " role does not exist. Please try `.lsar` for a list" +
+                                " of self-assignable roles.")
+                            .ConfigureAwait(false);
+                        }catch{ }
                 return (false, bestMatch.Value.ErrorReason, commands[0].Command);
             }
 
@@ -417,7 +426,6 @@ namespace NadekoBot.Services
                     return (false, null, cmd);
                 }
             }
-            _log.Info("chosenOverload: [{0}], chosenOverload.value: [{1}]", chosenOverload, chosenOverload.value);
             //If we get this far, at least one parse was successful. Execute the most likely overload.
             var chosenOverload = successfulParses[0];
             var execResult = (ExecuteResult)await chosenOverload.Key.ExecuteAsync(context, chosenOverload.Value, services).ConfigureAwait(false);
