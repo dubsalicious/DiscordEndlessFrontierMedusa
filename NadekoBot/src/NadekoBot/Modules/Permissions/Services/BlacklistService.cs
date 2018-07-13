@@ -22,7 +22,7 @@ namespace NadekoBot.Modules.Permissions.Services
             BlacklistedChannels = new ConcurrentHashSet<ulong>(blacklist.Where(bi => bi.Type == BlacklistType.Channel).Select(c => c.ItemId));
         }
 
-        public Task<bool> TryBlockEarly(IGuild guild, IUserMessage usrMsg)
+        public Task<bool> TryBlockEarly(IGuild guild, IUserMessage usrMsg, ITextChannel channel)
             => Task.FromResult((guild != null && BlacklistedGuilds.Contains(guild.Id)) ||
             BlacklistedChannels.Contains(usrMsg.Channel.Id) ||
             BlacklistedUsers.Contains(usrMsg.Author.Id));
