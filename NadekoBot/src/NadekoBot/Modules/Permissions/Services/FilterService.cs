@@ -70,18 +70,18 @@ namespace NadekoBot.Modules.Permissions.Services
                     if (guild == null || usrMsg == null)
                         return Task.CompletedTask;
 
-                    return TryBlockEarly(guild, usrMsg, channel);
+                    return TryBlockEarly(guild, usrMsg);
                 });
                 return Task.CompletedTask;
             };
         }
 
-        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg, ITextChannel channel)
+        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg)
             =>  !(msg.Author is IGuildUser gu) //it's never filtered outside of guilds, and never block administrators
                 ? false
-                : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg, channel));
+                : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
         
-        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg, ITextChannel channel)
+        public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg
         {
             if (guild is null)
                 return false;
@@ -101,10 +101,8 @@ namespace NadekoBot.Modules.Permissions.Services
                         try
                         {
                             _log.Info("test");
-                            
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
-                            //await ReplyConfirmLocalized("allowed").ConfigureAwait(false);
-                            await channel.SendErrorAsync("testy test").ConfigureAwait(false);
+                            await usrMsg.channel.SendErrorAsync("testy test").ConfigureAwait(false);
                             
                         }
                         catch (HttpException ex)

@@ -8,6 +8,6 @@ namespace NadekoBot.Common.ModuleBehaviors
     /// </summary>
     public interface IEarlyBlocker
     {
-        Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg, ITextChannel channel);
+        Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg);
     }
 }

@@ -37,7 +37,7 @@ namespace NadekoBot.Modules.Administration.Services
                                  x => new HashSet<ulong>(x.SlowmodeIgnoredUsers.Select(y => y.UserId))));
         }
 
-        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage usrMsg, ITextChannel channel)
+        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage usrMsg)
         {
             if (guild == null)
                 return false;
