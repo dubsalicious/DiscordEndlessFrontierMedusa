@@ -262,7 +262,7 @@ namespace NadekoBot.Modules.Administration
                             catch (Exception ex)
                             {
                                 _log.Warn(ex);
-                                _log.Warn("break");
+                                _log.Warn(ex);
                             }
                         }
                     }
@@ -275,7 +275,7 @@ namespace NadekoBot.Modules.Administration
                 {
                     await ReplyErrorLocalized("self_assign_perms").ConfigureAwait(false);
                     _log.Info(ex);
-                    _log.Warn("break");
+                    _log.Info(ex);
                     return;
                 }
                 var msg = await ReplyConfirmLocalized("self_assign_success",Format.Bold(role.Name)).ConfigureAwait(false);
