@@ -316,6 +316,7 @@ namespace NadekoBot.Services
 
         public async Task<(bool Success, string Error, CommandInfo Info)> ExecuteCommand(CommandContext context, string input, IServiceProvider services, MultiMatchHandling multiMatchHandling = MultiMatchHandling.Exception)
         {
+            _log.Info("Input: [{0}]", input);
             var searchResult = _commandService.Search(context, input);
             if (!searchResult.IsSuccess)
                 return (false, null, null);
