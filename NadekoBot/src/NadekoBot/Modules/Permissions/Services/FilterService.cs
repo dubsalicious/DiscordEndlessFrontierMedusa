@@ -102,7 +102,7 @@ namespace NadekoBot.Modules.Permissions.Services
                         {
                             _log.Info("test");
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
-                            await usrMsg.channel.SendErrorAsync("testy test").ConfigureAwait(false);
+                            await usrMsg.Channel.SendErrorAsync("testy test").ConfigureAwait(false);
                             
                         }
                         catch (HttpException ex)
