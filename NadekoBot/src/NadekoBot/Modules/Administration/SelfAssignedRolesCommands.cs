@@ -219,14 +219,13 @@ namespace NadekoBot.Modules.Administration
                 var guildUser = (IGuildUser)Context.User;
 
                 GuildConfig conf;
-                SelfAssignedRole[] roles;
-                using (var uow = _db.UnitOfWork)
+                SelfAssignedRole[] roles;   
+		using (var uow = _db.UnitOfWork)
                 {
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id).ToArray();
                 }
-             
-		        if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
+             	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
                     await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
                     return;
