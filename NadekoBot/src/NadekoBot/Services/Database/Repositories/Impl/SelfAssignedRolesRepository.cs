@@ -15,8 +15,8 @@ namespace NadekoBot.Services.Database.Repositories.Impl
         {
             var role = _set.FirstOrDefault(s => s.GuildId == guildId && s.RoleId == roleId);
 
-            if (role == null)
-                return false;
+            //if (role == null)
+            //    return false;
 
             _set.Remove(role);
             return true;
