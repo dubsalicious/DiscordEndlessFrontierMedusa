@@ -211,6 +211,9 @@ namespace NadekoBot.Services
             {
                 _log.Warn("Error in CommandHandler");
                 _log.Warn(ex);
+                if (ex == "Role not found") {
+                _log.warn("is it working?");
+                }
                 if (ex.InnerException != null)
                 {
                     _log.Warn("Inner Exception of the error in CommandHandler");
