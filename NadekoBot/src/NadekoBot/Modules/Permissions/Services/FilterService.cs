@@ -76,10 +76,10 @@ namespace NadekoBot.Modules.Permissions.Services
             };
         }
 
-        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg)
+        public async Task<bool> TryBlockEarly(IGuild guild, IUserMessage msg, ITextChannel channel)
             =>  !(msg.Author is IGuildUser gu) //it's never filtered outside of guilds, and never block administrators
                 ? false
-                : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
+                : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg, channel));
         
         public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg, ITextChannel channel)
         {
