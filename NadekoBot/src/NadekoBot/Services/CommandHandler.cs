@@ -400,9 +400,7 @@ namespace NadekoBot.Services
                             await context.Channel
                             .SendErrorAsync(
                                 context.User.Mention +
-                                " I am unable to add that role to you because that" +
-                                " role does not exist. Please try `.lsar` for a list" +
-                                " of self-assignable roles.")
+                                " This role does not exist. Please check pinned message to see list of valid roles.")
                             .ConfigureAwait(false);
                         }catch{ }
                 return (false, bestMatch.Value.ErrorReason, commands[0].Command);
