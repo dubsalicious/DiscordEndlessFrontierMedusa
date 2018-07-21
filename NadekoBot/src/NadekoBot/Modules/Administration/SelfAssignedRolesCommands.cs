@@ -227,7 +227,7 @@ namespace NadekoBot.Modules.Administration
                 }
              	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
-			if((role.ToString()).substring(0,5)!="stage"){
+			if(!(role.ToString()).Contains("stage")){
 			await Context.Channel.SendErrorAsync("How about **no**").ConfigureAwait(false);
                     //await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
 			}
