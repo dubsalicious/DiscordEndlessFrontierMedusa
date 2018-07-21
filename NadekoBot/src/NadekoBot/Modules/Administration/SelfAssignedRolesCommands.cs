@@ -228,7 +228,7 @@ namespace NadekoBot.Modules.Administration
              	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
                     //await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
-		    await channel.SendErrorAsync("role: "+role+" roleid: "+role.Id).ConfigureAwait(false)
+		    await channel.SendErrorAsync("role: "+role+" roleid: "+role.Id).ConfigureAwait(false);
                     return;
                 }
                 if (guildUser.RoleIds.Contains(role.Id))
