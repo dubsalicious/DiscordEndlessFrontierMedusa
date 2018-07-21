@@ -227,12 +227,18 @@ namespace NadekoBot.Modules.Administration
                 }
              	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
+			//Mambot module below:
 			if(!((role.ToString()).Contains("Stage"))){
 			await Context.Channel.SendErrorAsync("How about **no**").ConfigureAwait(false);
-                    //await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
 			}
-		    //await Context.Channel.SendErrorAsync("role: "+role+" roleid: "+role.Id).ConfigureAwait(false);
-                    return;
+                    	//Swears at users for trying to assign himself improper role, ignores stage commands.
+		
+			//E-77 Module below:
+			//if((role.ToString()).Contains("Stage")){
+			//await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
+			//}
+			//If asked for non-self-assignable role, heads to #support, ignores rest
+		        return;
                 }
                 if (guildUser.RoleIds.Contains(role.Id))
                 {
