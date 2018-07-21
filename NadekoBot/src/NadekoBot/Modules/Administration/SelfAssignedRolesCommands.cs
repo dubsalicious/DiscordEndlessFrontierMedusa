@@ -217,7 +217,7 @@ namespace NadekoBot.Modules.Administration
             {
                 
                 var guildUser = (IGuildUser)Context.User;
-
+		
                 GuildConfig conf;
                 SelfAssignedRole[] roles;   
 		using (var uow = _db.UnitOfWork)
@@ -227,8 +227,8 @@ namespace NadekoBot.Modules.Administration
                 }
              	if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
                 {
-			if(role.substring(0,5)!="stage"){
-			await Context.Channel.SendErrorAsync("How about **no**, "+guildUser.Name).ConfigureAwait(false);
+			if((role.ToString()).substring(0,5)!="stage"){
+			await Context.Channel.SendErrorAsync("How about **no**").ConfigureAwait(false);
                     //await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
 			}
 		    //await Context.Channel.SendErrorAsync("role: "+role+" roleid: "+role.Id).ConfigureAwait(false);
