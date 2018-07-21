@@ -169,7 +169,7 @@
   "administration_self_assign_already_excl": "You already have {0} exclusive self-assigned role.",
   "administration_self_assign_excl": "Self assigned roles are now exclusive!",
   "administration_self_assign_list": "There are {0} self assignable roles",
-  "administration_self_assign_not": "That role is not self-assignable. Please, post a screenshot with your max revival floor to #support and you will be assigned a proper role.",
+  "administration_self_assign_not": "That role is not self-assignable. Please, post a screenshot with your max revival floor to `#support` and you will be assigned a proper role.",
   "administration_self_assign_not_exist": "This Role does not exist, check the Pinned Messages for existing assignable roles",
   "administration_self_assign_not_have": "You don't have {0} role.",
   "administration_self_assign_no_excl": "Self assigned roles are now not exclusive!",
