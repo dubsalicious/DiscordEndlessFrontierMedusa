@@ -400,7 +400,7 @@ namespace NadekoBot.Services
                             await context.Channel
                             .SendErrorAsync(
                                 context.User.Mention +
-                                " This role does not exist. Please check pinned message to see list of valid roles.")
+                                " This role does not exist. Please check pinned message to see list of valid roles." + context.Channel)
                             .ConfigureAwait(false);
                         }catch{ }
                 return (false, bestMatch.Value.ErrorReason, commands[0].Command);
