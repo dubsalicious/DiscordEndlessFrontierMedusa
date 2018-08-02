@@ -395,12 +395,12 @@ namespace NadekoBot.Services
                     .FirstOrDefault(x => !x.Value.IsSuccess);
                 //For the .iam command failure, add a special case where we show a custom message to the user too
                 if(bestMatch.Key.Command.Name == "iam"
-                        && bestMatch.Value.ErrorReason == "Role not found."){
+                        && bestMatch.Value.ErrorReason == "Role not found." && context.Channel == "medusa_testing_area"){
                         try{
                             await context.Channel
                             .SendErrorAsync(
                                 context.User.Mention +
-                                " This role does not exist. Please check pinned message to see list of valid roles." + context.Channel)
+                                " This role does not exist. Please check pinned message to see list of valid roles.")
                             .ConfigureAwait(false);
                         }catch{ }
                 return (false, bestMatch.Value.ErrorReason, commands[0].Command);
