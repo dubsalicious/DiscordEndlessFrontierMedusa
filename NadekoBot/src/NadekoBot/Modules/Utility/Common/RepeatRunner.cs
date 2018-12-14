@@ -10,7 +10,6 @@ using NLog;
 using System.Linq;
 using NadekoBot.Modules.Utility.Services;
 
-
 namespace NadekoBot.Modules.Utility.Common
 {
     public class RepeatRunner
