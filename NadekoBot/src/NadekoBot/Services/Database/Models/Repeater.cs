@@ -3,7 +3,7 @@ using NadekoBot.Core.Common;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NadekoBot.Core.Services.Database.Models
+namespace NadekoBot.Services.Database.Models
 {
     [Table("GuildRepeater")]
     public class Repeater : DbEntity
