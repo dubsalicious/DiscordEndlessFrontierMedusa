@@ -54,9 +54,9 @@ namespace NadekoBot.Modules.Utility
                     await ReplyErrorLocalized("index_out_of_range").ConfigureAwait(false);
                     return;
                 }
-                var repeater = repList[index];
-                repeater.Value.Reset();
-                await repeater.Value.Trigger().ConfigureAwait(false);
+                var repeater = repList[index].Repeater;
+                repList[index].Resrt();
+                await repeaterList[index].Trigger();
 
                 try { await Context.Message.AddReactionAsync(new Emoji("🔄")).ConfigureAwait(false); } catch { }
             }
