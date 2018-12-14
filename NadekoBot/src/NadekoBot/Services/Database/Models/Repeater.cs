@@ -1,5 +1,5 @@
 ﻿using CommandLine;
-using NadekoBot.Core.Common;
+using NadekoBot.Common;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
