@@ -14,7 +14,7 @@ using NadekoBot.Common.Attributes;
 using NadekoBot.Common.TypeReaders;
 using NadekoBot.Modules.Utility.Common;
 using NadekoBot.Modules.Utility.Services;
-using NadekoBot.Common;
+using NadekoBot.Core.Common;
 using System.Collections.Generic;
 
 namespace NadekoBot.Modules.Utility
@@ -54,9 +54,9 @@ namespace NadekoBot.Modules.Utility
                     await ReplyErrorLocalized("index_out_of_range").ConfigureAwait(false);
                     return;
                 }
-                var repeater = repList[index].Repeater;
-                repList[index].Resrt();
-                await repeaterList[index].Trigger();
+                var repeater = repList[index];
+                repeater.Value.Reset();
+                await repeater.Value.Trigger().ConfigureAwait(false);
 
                 try { await Context.Message.AddReactionAsync(new Emoji("🔄")).ConfigureAwait(false); } catch { }
             }
@@ -103,6 +103,7 @@ namespace NadekoBot.Modules.Utility
             [NadekoCommand, Usage, Description, Aliases]
             [RequireContext(ContextType.Guild)]
             [RequireUserPermission(GuildPermission.ManageMessages)]
+            [NadekoOptions(typeof(Repeater.Options))]
             [Priority(0)]
             public Task Repeat(params string[] options)
                 => Repeat(null, options);
@@ -110,6 +111,7 @@ namespace NadekoBot.Modules.Utility
             [NadekoCommand, Usage, Description, Aliases]
             [RequireContext(ContextType.Guild)]
             [RequireUserPermission(GuildPermission.ManageMessages)]
+            [NadekoOptions(typeof(Repeater.Options))]
             [Priority(1)]
             public async Task Repeat(GuildDateTime dt, params string[] options)
             {
