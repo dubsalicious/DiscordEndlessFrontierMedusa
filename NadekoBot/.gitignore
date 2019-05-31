@@ -1,0 +1,3 @@
+src/NadekoBot/credentials.json
+src/NadekoBot/bin/Release/netcoreapp1.1/data/NadekoBot.db
+src/NadekoBot/bin/Release/netcoreapp2.0/data/NadekoBot.db

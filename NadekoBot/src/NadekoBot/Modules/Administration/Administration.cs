@@ -160,20 +160,6 @@ namespace NadekoBot.Modules.Administration
             await role.ModifyAsync(r => r.Hoist = !role.IsHoisted).ConfigureAwait(false);
             await ReplyConfirmLocalized("rh", Format.Bold(role.Name), Format.Bold(role.IsHoisted.ToString())).ConfigureAwait(false);
         }
-        
-        [NadekoCommand, Usage, Description, Aliases]
-        [RequireContext(ContextType.Guild)]
-        [RequireUserPermission(GuildPermission.ManageRoles)]
-        [RequireBotPermission(GuildPermission.ManageRoles)]
-        public async Task DeleteRole([Remainder] IRole role)
-        {
-            var guser = (IGuildUser)Context.User;
-            if (Context.User.Id != guser.Guild.OwnerId 
-                && guser.GetRoles().Max(x => x.Position) <= role.Position)
-                return;
-            await role.DeleteAsync().ConfigureAwait(false);
-            await ReplyConfirmLocalized("dr", Format.Bold(role.Name)).ConfigureAwait(false);
-        }
 
         [NadekoCommand, Usage, Description, Aliases]
         [RequireContext(ContextType.Guild)]

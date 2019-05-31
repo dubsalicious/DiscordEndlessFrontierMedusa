@@ -6,7 +6,6 @@ using Discord;
 using Discord.Net;
 using Discord.WebSocket;
 using NadekoBot.Common.Collections;
-using NadekoBot.Common.Attributes;
 using NadekoBot.Common.ModuleBehaviors;
 using NadekoBot.Extensions;
 using NadekoBot.Services;
@@ -80,7 +79,7 @@ namespace NadekoBot.Modules.Permissions.Services
             =>  !(msg.Author is IGuildUser gu) //it's never filtered outside of guilds, and never block administrators
                 ? false
                 : !gu.GuildPermissions.Administrator && (await FilterInvites(guild, msg) || await FilterWords(guild, msg));
-        
+
         public async Task<bool> FilterWords(IGuild guild, IUserMessage usrMsg)
         {
             if (guild is null)
@@ -100,10 +99,7 @@ namespace NadekoBot.Modules.Permissions.Services
                     {
                         try
                         {
-                            _log.Info("test");
                             await usrMsg.DeleteAsync().ConfigureAwait(false);
-                            await usrMsg.Channel.SendErrorAsync("testy test").ConfigureAwait(false);
-                            
                         }
                         catch (HttpException ex)
                         {
