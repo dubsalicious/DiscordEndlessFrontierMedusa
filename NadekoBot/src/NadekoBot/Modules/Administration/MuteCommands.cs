@@ -72,8 +72,8 @@ namespace NadekoBot.Modules.Administration
             [Priority(1)]
             public async Task Mute(int minutes, IGuildUser user)
             {
-                if (minutes < 1 || minutes > 1440)
-                    return;
+//                if (minutes < 1 || minutes > 1440)
+//                    return;
                 try
                 {
                     await _service.TimedMute(user, TimeSpan.FromMinutes(minutes)).ConfigureAwait(false);
